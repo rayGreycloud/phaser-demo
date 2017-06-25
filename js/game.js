@@ -4,7 +4,7 @@ let config = {
   width: 480,
   height: 360,
   renderer: 'Phaser.AUTO',
-  parent: 'gameDiv'
+  parent: 'gameDiv',
   multiTexture: true,
   antialias: true,
   state: null
