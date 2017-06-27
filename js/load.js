@@ -9,7 +9,7 @@ var loadState = {
     game.scale.PageAlignVertically = true;
     game.state.backgroundColor = '#000000';
 
-    game.load.spritesheet('characters', 'assets/sprites/dude.png', 32, 48);
+    game.load.spritesheet('characters', 'assets/sprites/characters.png', 24, 24);
 
   },
   create: function () {
