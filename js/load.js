@@ -12,6 +12,8 @@ var loadState = {
     game.load.spritesheet('characters', 'assets/sprites/characters.png', 24, 24);
     game.load.tilemap('level', 'assets/maps/room1.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('tiles', 'assets/sprites/world.png');
+
+    game.load.audio('hit', 'assets/sounds/hit.wav');
   },
   create: function () {
     game.state.start('title');
