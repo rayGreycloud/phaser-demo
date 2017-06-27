@@ -10,7 +10,8 @@ var loadState = {
     game.state.backgroundColor = '#000000';
 
     game.load.spritesheet('characters', 'assets/sprites/characters.png', 24, 24);
-
+    game.load.tilemap('level', 'assets/maps/room1.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.image('tiles', 'assets/sprites/world.png');
   },
   create: function () {
     game.state.start('title');

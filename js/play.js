@@ -2,9 +2,16 @@
 let playState = {
   player: null,
   mob: null,
+  layer: null,
 
   create: function () {
     var _this = this;
+
+    var map = game.add.tilemap('level');
+    map.addTilesetImage('world', 'tiles');
+    map.setCollision([217, 218, 219, 221]);
+    _this.layer = map.createLayer('Tile Layer 1');
+
     _this.player = new Player(300, 200);
     game.add.existing(_this.player);
     game.physics.enable(_this.player, Phaser.Physics.ARCADE);
@@ -37,6 +44,9 @@ let playState = {
     }
     _this.player.update();
     game.physics.arcade.collide(_this.player, _this.mob, function () {
+      _this.player.stop();
+    });
+    game.physics.arcade.collide(_this.player, _this.layer, function () {
       _this.player.stop();
     });
   }
@@ -80,8 +90,6 @@ function Player(x, y) {
     var _this = this;
     _this.xDest = _this.x;
     _this.yDest = _this.y;
-    _this.body.velocity.x = 0;
-    _this.body.velocity.y = 0;
   }
 
   return player;
