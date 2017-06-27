@@ -88,7 +88,7 @@ function Player(x, y) {
 };
 
 function Enemy(x, y) {
-  var enemy = game.add.sprite(100, 100, 'characters'); enemy.xDest = x;
+  var enemy = game.add.sprite(x, y, 'characters'); enemy.xDest = x;
   enemy.yDest = y;
   enemy.animations.add('wait', [544, 545], 4);
 
