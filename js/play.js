@@ -9,20 +9,23 @@ let playState = {
 
     var map = game.add.tilemap('level');
     map.addTilesetImage('world', 'tiles');
+    game.world.setBounds(0, 0, 480, 360);
     map.setCollision([217, 218, 219, 221]);
     _this.layer = map.createLayer('Tile Layer 1');
 
-    _this.player = new Player(300, 200);
+    _this.player = new Player(150, 100);
+    game.camera.x = 300;
+    game.camera.y = 200;
     game.add.existing(_this.player);
     game.physics.enable(_this.player, Phaser.Physics.ARCADE);
 
     _this.mob = game.add.group();
-    _this.mob.add(Enemy(100, 100));
-    _this.mob.add(Enemy(200, 100));
-    _this.mob.add(Enemy(100, 200));
-    _this.mob.add(Enemy(200, 200));
-    _this.mob.add(Enemy(300, 300));
-    _this.mob.add(Enemy(400, 200));
+    // _this.mob.add(Enemy(100, 100));
+    // _this.mob.add(Enemy(200, 100));
+    // _this.mob.add(Enemy(100, 200));
+    // _this.mob.add(Enemy(200, 200));
+    _this.mob.add(Enemy(200, 300));
+    _this.mob.add(Enemy(400, 100));
 
     _this.mob.forEach(function(enemy, index) {
       game.physics.enable(enemy, Phaser.Physics.ARCADE);
@@ -30,6 +33,12 @@ let playState = {
     });
 
     game.input.activePointer.capture = true;
+
+    var text = game.add.text(0, 165, 'Life', { font: '8px', fill: '#ffffff', align: 'center' });
+    text.fixedToCamera = true;
+    var lifebar = game.add.sprite(20, 165, 'lifebar');
+    lifebar.scale.setTo(0.25, 0.25);
+    lifebar.fixedToCamera = true;
   },
 
   update: function () {
@@ -41,7 +50,7 @@ let playState = {
     });
 
     if (game.input.activePointer.isDown) {
-      _this.player.setDest(game.input.x, game.input.y);
+      _this.player.setDest(game.input.x - game.world.worldPosition.x, game.input.y - game.world.worldPosition.y);
     }
     _this.player.update();
     game.physics.arcade.collide(_this.player, _this.mob, function (p, e) {
@@ -74,8 +83,10 @@ function Player(x, y) {
 
   player.update = function () {
     var _this = this;
-
     move(_this);
+    // Camera follow player
+    game.camera.x = _this.x - 150;
+    game.camera.y = _this.y - 100;
   }
 
   player.stop = function () {

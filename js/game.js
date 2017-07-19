@@ -1,8 +1,8 @@
 // game.js
 // Set game parameters
 let config = {
-  width: 480,
-  height: 360,
+  width: 240,
+  height: 180,
   renderer: 'Phaser.AUTO',
   parent: 'gameDiv',
   multiTexture: true,
